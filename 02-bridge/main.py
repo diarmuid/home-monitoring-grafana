@@ -41,19 +41,21 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     """The callback for when a PUBLISH message is received from the server."""
-    print(msg.topic + ' ' + str(msg.payload))
+    print("on_message" + msg.topic + ' ' + str(msg.payload))
     sensor_data = _parse_mqtt_message(msg.topic, msg.payload.decode('utf-8'))
     if sensor_data is not None:
         _send_sensor_data_to_influxdb(sensor_data)
 
 
 def _parse_mqtt_message(topic, payload):
+    print("Parse " + topic)
     match = re.match(MQTT_REGEX, topic)
     if match:
         location = match.group(1)
         measurement = match.group(2)
         if measurement == 'status':
             return None
+        print("match " + location + ' ' + measurement)
         return SensorData(location, measurement, float(payload))
     else:
         return None
@@ -94,5 +96,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print('MQTT to InfluxDB bridge')
+    print('MQTT to InfluxDB bridge v2')
     main()

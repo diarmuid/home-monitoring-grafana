@@ -4,6 +4,10 @@ Requires=docker.service
 After=docker.service
 
 [Service]
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=homemonitor
+
 Restart=always
 
 WorkingDirectory=/home/pi/build/home-monitoring-grafana

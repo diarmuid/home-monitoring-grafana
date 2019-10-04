@@ -41,3 +41,13 @@ services:
       - mosquitto
       - influxdb
     restart: always
+   
+  mqttbridgeaws:
+    build: ./06-bridge-aws
+    image: nilhcem/mqttbridge
+    container_name: mqttbridgeaws
+    depends_on:
+      - mosquitto
+      - influxdb
+    restart: always
+   

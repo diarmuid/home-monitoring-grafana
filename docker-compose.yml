@@ -33,14 +33,14 @@ services:
       - ${DATA_DIR}/grafana:/var/lib/grafana
     restart: always
 
-  mqttbridge:
-    build: ./02-bridge
-    image: nilhcem/mqttbridge
-    container_name: mqttbridge
-    depends_on:
-      - mosquitto
-      - influxdb
-    restart: always
+    #mqttbridge:
+    #build: ./02-bridge
+    #image: nilhcem/mqttbridge
+    #container_name: mqttbridge
+    #depends_on:
+    #  - mosquitto
+    #  - influxdb
+    #restart: always
    
   mqttbridgeaws:
     build: ./06-bridge-aws
